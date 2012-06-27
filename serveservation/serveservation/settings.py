@@ -1,5 +1,7 @@
 # Django settings for serveservation project.
 
+import os
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
