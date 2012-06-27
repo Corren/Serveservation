@@ -6,17 +6,68 @@
 <head>
     <link rel="stylesheet" href="/style.css" />
     <title>{% block title %}User test{% endblock %}</title>
+  <!-- VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV############################ -->
+
+	<title>Server Reservations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="imagetoolbar" content="no" />
+<link rel="stylesheet" href="styles/layout.css" type="text/css" />
+<script type="text/javascript" src=% static "scripts/jquery-1.4.1.min.js" %></script>
+<script type="text/javascript" src=% static"scripts/jquery-slidedeck.pack.lite.js"%></script>
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^########################## -->
+
 </head>
 
 <body>
     <div id="header">
         {% block header %}
+  <!-- VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV############################ -->
+<div class="wrapper row1">
+  <div id="header" class="clear">
+    <div class="fl_left">
+      <h1><a href="index.html"><img src="images/unboundID-logo.png" alt="Will be changed later." /></a></h1>
+      <p>Server Reservations</p>
+    </div>
+    <form action="#" method="post" id="login">
+      <fieldset>
+        <legend>Login</legend>
+        <input type="password" /> 
+        <input type="text" />
+        <div id="forgot">Need <a href="#">Help ?</a> or <a href="#">Forgot Your Details?</a></div>
+        <input type="image" src="images/sign_in.gif" id="signin" alt="Sign In" />
+      </fieldset>
+    </form>
+  </div>
+</div>
+<!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^########################## -->
           <a href="">{% trans "Home" %}</a> | 
 
           {% if user.is_authenticated %}
             {% trans "Logged in" %}: {{ user.username }} 
             (<a href="{% url auth_logout %}">{% trans "Log out" %}</a> | 
             <a href="{% url auth_password_change %}">{% trans "Change password" %}</a>)
+<!-- VVVVVVVVVVVVVVVVVVVVVVVVVV################################## -->
+
+			<div class="wrapper row2">
+  <div id="topnav">
+    <ul>
+      <li class="active"><a href="index.html">Systems</a></li>
+      <li><a href="history.html">History</a></li> 
+      <li class="last"><a href="users.html">Users</a></li>
+    </ul>
+    <div  class="clear"></div>
+  </div>
+</div>
+			
+
+<div class="wrapper row4">
+  <div id="container" class="clear">
+    ENTER IN SYSTEM RESERVE HERE
+  </div>
+</div>
+<!-- ^^^^^^^^^^^^^################################################## -->
+
+
           {% else %}
             <a href="{% url auth_login %}">{% trans "Log in" %}</a>
           {% endif %}
@@ -30,6 +81,16 @@
 
     <div id="footer">
         {% block footer %}
+<!-- VVVVVVVVVVVVVVVVVVVVVVVVVV##################################### -->
+
+		<div class="wrapper">
+  <div id="copyright" class="clear">
+    <p class="fl_left">Copyright &copy; 2012 - All Rights Reserved - <a href="www.unboundid.com">UnboundID</a></p>
+    <!-- <p class="fl_right">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p> -->
+  </div>
+</div>
+<script type="text/javascript">$('.slidedeck').slidedeck();</script>
+<!-- ^^^^^^^^^^^^^########################################## -->
         <hr />
         {% endblock %}
     </div>
