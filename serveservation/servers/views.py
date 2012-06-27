@@ -2,6 +2,7 @@
 #from django.template import Context, loader
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
+from django.core.context_processors import csrf
 from servers.models import Server
 
 #def index(request):
@@ -13,5 +14,7 @@ from servers.models import Server
   #return HttpResponse(t.render(c))
 
 def index(request):
+  c = {}
+  c.update(csrf(request))
   all_servers_list = Server.objects.all()
-  return render_to_response('servers/index.html', {'all_servers_list' : all_servers_list})
+  return render_to_response('servers/index.html', {'all_servers_list' : all_servers_list}, c)
