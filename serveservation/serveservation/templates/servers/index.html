@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %} 
+  Test Title
+{% endblock %}
+
+{% block content %}
+  {% if all_servers_list %}
+    <table>
+      <tr>
+        <td>Name</td>
+        <td>Operating System</td>
+        <td>Cpu</td>
+        <td>Memory</td>
+        <td>Operational</td>
+        <td>Reservation</td>
+        <td>End Date</td>
+        <td>Notes</td>
+      </tr>
+      {% for server in all_servers_list %}
+        <tr>
+          <td> {{ server.name }} </td>
+          <td> {{ server.operating_system }} </td>
+          <td> {{ server.cpu }} </td>
+          <td> {{ server.memory }} </td>
+          <td> {{ server.operational }} </td>
+          <td> {{ server.reservation }} </td>
+          <td> {{ server.reservation.end_date }} </td>
+          <td> {{ server.notes }} </td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>No servers are available.</p>
+  {% endif %}
+{% endblock %}
