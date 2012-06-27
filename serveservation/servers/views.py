@@ -14,7 +14,5 @@ from servers.models import Server
   #return HttpResponse(t.render(c))
 
 def index(request):
-  c = {}
-  c.update(csrf(request))
   all_servers_list = Server.objects.all()
-  return render_to_response('servers/index.html', {'all_servers_list' : all_servers_list}, c)
+  return render_to_response('servers/index.html', {'all_servers_list' : all_servers_list} )

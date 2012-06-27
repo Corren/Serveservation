@@ -22,9 +22,27 @@
           <td> {{ server.operating_system }} </td>
           <td> {{ server.cpu }} </td>
           <td> {{ server.memory }} </td>
-          <td> {{ server.operational }} </td>
-          <td> {{ server.reservation }} </td>
-          <td> {{ server.reservation.end_date }} </td>
+          <td>
+            {% if server.operational %}
+              Works!
+            {% else %}
+              Doesn't Work!
+            {% endif %}
+          </td>
+          <td>
+            {% if server.reservation != "" %} 
+              {{ server.reservation }} 
+            {% else %}
+              None
+            {% endif %}
+          </td>
+          <td> 
+            {% if server.reservation.end_date != "" %}
+              {{ server.reservation.end_date }}
+            {% else %}
+              Reserve
+            {% endif %}
+          </td>
           <td> {{ server.notes }} </td>
         </tr>
       {% endfor %}
