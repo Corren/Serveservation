@@ -2,3 +2,6 @@
 database.db
 
 /res-bak/
+
+# Any swap files that I might mess up
+*.swp
