@@ -3,7 +3,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.core.context_processors import csrf
-from servers.models import Server, Reservation
+from servers.models import Server
 
 #def index(request):
   #all_servers_list = Server.objects.all()
@@ -13,6 +13,5 @@ from servers.models import Server, Reservation
   #})
   #return HttpResponse(t.render(c))
 
-def index(request):
-  all_servers_list = Server.objects.all()
-  return render_to_response('servers/index.html', {'all_servers_list' : all_servers_list} )
+def home(request):
+  return render_to_response('index.html' )

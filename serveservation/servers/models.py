@@ -1,6 +1,10 @@
 import datetime
+from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -18,20 +22,36 @@ class Server(models.Model):
 
 class Reservation(models.Model):
   server = models.OneToOneField(Server, primary_key=True)
-  reserved = models.BooleanField()
   reserved_by = models.ForeignKey(User, blank=True, null=True)
-  start_date = models.DateField('date reserved', default=datetime.date.today(), null=True)
-  end_date = models.DateField('reservation end', default=datetime.date.today(), null=True)
+  start_date = models.DateField('date reserved', default=datetime.date.today(), blank=True, null=True)
+  end_date = models.DateField('reservation end', default=datetime.date.today(), blank=True, null=True)
+  expired = False 
+
+  def clean(self):
+    time_delta = self.end_date - datetime.date.today()
+    if (self.end_date == None) :
+      self.expired = True
+    elif time_delta < datetime.timedelta(0):
+      self.expired = True
+
+    if (time_delta < warn_tdelta):
+      self.warning = True
+
+    if self.expired:
+      self.reserved_by = None 
+      self.start_date = None
+      self.end_date = None 
+      self.expired = False
 
   def __unicode__(self):
-    return u"%s is reserved by this Reservation" % self.server.name
+    if self.reserved_by != None:
+      reserved_string = u"%s is reserved by %s" % (self.server.name, self.reserved_by)
+    else:
+      reserved_string = u"%s is not reserved" % self.server.name
+    return reserved_string
 
-class ExpiredReservatation(models.Model):
-  allReservations = list(Reservation.objects.all())
-  expiredReservations = []
-  for res in allReservations:
-    if res.end_date == datetime.date.today():
-      expiredReservations.append(res)
-
-  def __unicode__(self):
-    return u"A list of expired reservations is: %s" % expiredReservations
+@receiver(post_save, sender=Server)
+def create_reservation(sender, instance, created, **kwargs):
+  if(created):
+    reservation = Reservation(server=instance, reserved_by=None, start_date=None, end_date=None)
+    reservation.save()
