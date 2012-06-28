@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     'south',
+    'registration',
     'kombu.transport.django',
     'djcelery',
 
