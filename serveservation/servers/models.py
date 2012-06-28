@@ -25,7 +25,7 @@ class Reservation(models.Model):
 
   def __unicode__(self):
     return u"%s is reserved by this Reservation" % self.server.name
-
+ 
 class ExpiredReservatation(models.Model):
   allReservations = list(Reservation.objects.all())
   expiredReservations = []
