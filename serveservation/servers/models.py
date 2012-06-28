@@ -3,7 +3,7 @@ from datetime import timedelta
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.conf import settings
 
@@ -24,7 +24,7 @@ class Server(models.Model):
     return self.name
 
 class Reservation(models.Model):
-  server = models.OneToOneField(Server, primary_key=True)
+  server = models.ForeignKey(Server, blank=True, null=True)
   reserved_by = models.ForeignKey(User, blank=True, null=True)
   start_date = models.DateField('date reserved', default=datetime.date.today(), blank=True, null=True)
   end_date = models.DateField('reservation end', default=datetime.date.today(), blank=True, null=True)
