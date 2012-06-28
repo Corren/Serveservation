@@ -131,7 +131,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     'south',
-    'registration',
 
     # Our own models
     'servers',
