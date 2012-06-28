@@ -2,6 +2,7 @@
 
 import os
 
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -139,6 +140,13 @@ INSTALLED_APPS = (
 # Django-Registration things
 ACCOUNT_ACTIVATION_DAYS = 7 #Allow the user a week to activate
 
+# Email Alert Things
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_HOST_USER=''
+EMAIL_HOST_PASSWORD=''
+EMAIL_SUBJECT_PREFIX='[Serveservation]'
+EMAIL_USE_TLS=True
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -168,3 +176,9 @@ LOGGING = {
         },
     }
 }
+
+try:
+  from local_settings import *
+  print "Local settings being used"
+except:
+  pass

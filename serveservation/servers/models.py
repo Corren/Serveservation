@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.conf import settings
+
+from django.core.mail import send_mail
 
 # Create your models here.
 
@@ -28,20 +31,7 @@ class Reservation(models.Model):
   expired = False 
 
   def clean(self):
-    time_delta = self.end_date - datetime.date.today()
-    if (self.end_date == None) :
-      self.expired = True
-    elif time_delta < datetime.timedelta(0):
-      self.expired = True
-
-    if (time_delta < warn_tdelta):
-      self.warning = True
-
-    if self.expired:
-      self.reserved_by = None 
-      self.start_date = None
-      self.end_date = None 
-      self.expired = False
+    check_expired(self)
 
   def __unicode__(self):
     if self.reserved_by != None:
@@ -55,3 +45,18 @@ def create_reservation(sender, instance, created, **kwargs):
   if(created):
     reservation = Reservation(server=instance, reserved_by=None, start_date=None, end_date=None)
     reservation.save()
+
+
+def check_expired(res):
+    time_delta = res.end_date - datetime.date.today()
+    if (res.end_date == None) :
+      res.expired = True
+    elif time_delta < datetime.timedelta(0):
+      res.expired = True
+
+    if res.expired:
+      res.reserved_by = None 
+      res.start_date = None
+      res.end_date = None 
+      res.expired = False
+      send_mail('[Serveservation] Your reservation has expired', 'Sorry, your server reservation has expired', 'david.dropinski@unboundid.com', ['david.dropinski@unboundid.com'], fail_silently=False)

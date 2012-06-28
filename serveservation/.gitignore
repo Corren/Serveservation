@@ -5,3 +5,4 @@ database.db
 
 # Any swap files that I might mess up
 *.swp
+local_settings.py
