@@ -30,8 +30,8 @@ class Reservation(models.Model):
   end_date = models.DateField('reservation end', default=datetime.date.today(), blank=True, null=True)
   expired = False 
 
-  def clean(self):
-    check_expired(self)
+  #def clean(self):
+    #check_expired(self)
 
   def __unicode__(self):
     if self.reserved_by != None:
@@ -48,15 +48,23 @@ def create_reservation(sender, instance, created, **kwargs):
 
 
 def check_expired(res):
-    time_delta = res.end_date - datetime.date.today()
-    if (res.end_date == None) :
-      res.expired = True
-    elif time_delta < datetime.timedelta(0):
-      res.expired = True
+    if (res.end_date != None) :
+      time_delta = res.end_date - datetime.date.today()
+      if time_delta < datetime.timedelta(0):
+        res.expired = True
 
     if res.expired:
+      email_subject = u"[Serveservation] Reservation for %s Expired" % res.server
+      email_body =u"Your reservation of a server has ended. \n\nReservation start date: %s\nReservation end date: %s\n\nServer Name: %s\nServer IP: %s\n" % (res.start_date, res.end_date, res.server.name, res.server.ip_address) 
+      email_from="david.dropinski@unboundid.com"
+      email_to=[]
+      email_to.append(res.reserved_by.email)
+      send_mail(email_subject, email_body, email_from, email_to, fail_silently=False)
+      expire_data(res)
+
+def expire_data(res):
       res.reserved_by = None 
       res.start_date = None
       res.end_date = None 
       res.expired = False
-      send_mail('[Serveservation] Your reservation has expired', 'Sorry, your server reservation has expired', 'david.dropinski@unboundid.com', ['david.dropinski@unboundid.com'], fail_silently=False)
+      res.save()

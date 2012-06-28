@@ -131,10 +131,18 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     'south',
+    'kombu.transport.django',
+    'djcelery',
 
     # Our own models
     'servers',
 )
+
+
+# Celery Things
+BROKER_URL = "django://" # Tell kombu to use the django database as message queue
+import djcelery
+djcelery.setup_loader()
 
 # Django-Registration things
 ACCOUNT_ACTIVATION_DAYS = 7 #Allow the user a week to activate
