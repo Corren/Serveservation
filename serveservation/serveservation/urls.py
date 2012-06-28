@@ -15,6 +15,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^servers/$', 'servers.views.index'),
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^expiredTest/$', 'servers.views.expiredTest'),
 )
 
