@@ -34,6 +34,9 @@ class Reservation(models.Model):
     elif time_delta < datetime.timedelta(0):
       self.expired = True
 
+    if (time_delta < warn_tdelta):
+      self.warning = True
+
     if self.expired:
       self.reserved_by = None 
       self.start_date = None

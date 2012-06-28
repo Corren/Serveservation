@@ -12,7 +12,7 @@
         <td>Cpu</td>
         <td>Memory</td>
         <td>Operational</td>
-        <td>Reservation</td>
+        <td>Reserved By</td>
         <td>End Date</td>
         <td>Notes</td>
       </tr>
@@ -31,7 +31,7 @@
           </td>
           <td>
             {% if server.reservation != "" %} 
-              {{ server.reservation }} 
+              {{ server.reservation.reserved_by }} 
             {% else %}
               None
             {% endif %}
