@@ -3,7 +3,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.core.context_processors import csrf
-from servers.models import Server
+from servers.models import Server, Reservation
 
 #def index(request):
   #all_servers_list = Server.objects.all()
