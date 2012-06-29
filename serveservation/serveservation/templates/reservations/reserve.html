@@ -6,8 +6,8 @@ Reserve a Server
 
 {% block content %}
 <form method="post" action="">
-  {{ formset }}
   {% csrf_token %}
+  {{ form }}
   <input type="submit" value="Reserve Server" />
 </form>
 {% endblock %}

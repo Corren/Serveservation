@@ -15,7 +15,7 @@ Reservations
       {% for reservation in all_reservations %}
         {% if reservation.reserved_by != None %}
           <tr>
-            <td> {{ reservation.server.name  }} </td>
+            <td><a href="/servers/{{ reservation.server.name }}"> {{ reservation.server.name  }} </a></td>
             <td> {{ reservation.reserved_by }} </td>
             <td> {{ reservation.start_date }} </td>
             <td> {{ reservation.end_date }} </td>

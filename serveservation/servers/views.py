@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse
 from django.core.context_processors import csrf
 from django.forms.models import modelformset_factory
+from django.template import RequestContext
 from servers.models import Server, Reservation
 from servers.forms import ServerForm, ReservationForm
 
@@ -21,11 +22,11 @@ def reservations(request):
   return render_to_response('reservations/index.html', {'all_reservations' : all_reservations})
 
 def reserve_server(request):
-  ReserveFormSet = modelformset_factory(Reservation)
   if request.method == 'POST':
-    formset = ReserveFormSet(request.POST, request.FILES)
-    if formset.is_valid():
-      formset.save()
+    form = ReservationForm(request.POST)
+    if form.is_valid():
+      form.save()
   else:
-    formset = ReserveFormSet()
-  return render_to_response('reservations/reserve.html', { 'formset' : formset })
+    form = ReservationForm()
+  csrfContext = RequestContext(request)
+  return render_to_response('reservations/reserve.html', { 'form' : form }, csrfContext)
