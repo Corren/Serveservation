@@ -18,7 +18,7 @@ class Server(models.Model):
   cpu = models.CharField(max_length=150)
   memory = models.IntegerField()
   operational = models.BooleanField()
-  notes = models.CharField(max_length=300)
+  notes = models.CharField(max_length=300, blank=True, null=True)
 
   def __unicode__(self):
     return self.name
@@ -28,9 +28,17 @@ class Reservation(models.Model):
   reserved_by = models.ForeignKey(User, blank=True, null=True)
   start_date = models.DateField('start date', default=datetime.date.today(), blank=True, null=True)
   end_date = models.DateField('reservation end', default=datetime.date.today(), blank=True, null=True)
+  started = False
   expired = False 
+  upcoming_warn = False
 
   def clean(self):
+    if (self.server.operational == False):
+      raise ValidationError(u"%s claims to be unoperational." % self.server.name)
+
+
+    start_overlap = False
+    end_overlap = False
     if(self.start_date > self.end_date):
       raise ValidationError(u"Reservation End cannot come before the Start Date")
     all_reservations = Reservation.objects.all() 
@@ -46,7 +54,14 @@ class Reservation(models.Model):
           end_overlap = True
 
         if (start_overlap and end_overlap):
-          raise ValidationError(u"You're reservation falls inside of another reservation by %s." % reservation.reserved_by)
+          raise ValidationError(u"You're reservation falls inside of another reservation by %s, which starts %s and ends %s." % (reservation.reserved_by, reservation.start_date, reservation.end_date))
+        elif (start_overlap):
+          raise ValidationError(u"You're reservation starts inside of %s's reservation of the same server, which starts %s and ends %s." % (reservation.reserved_by, reservation.start_date, reservation.end_date))
+        elif (end_overlap):
+          raise ValidationError(u"You're reservation ends inside of %s's reservation of the same server, which starts %s and ends %s." % (reservation.reserved_by, reservation.start_date, reservation.end_date))
+    if(self.start_date != None):
+      if(self.start_date == datetime.date.today()) or (self.start_date < datetime.date.today()):
+        self.started = True
 
   def __unicode__(self):
     if self.reserved_by != None:
@@ -61,6 +76,18 @@ def create_reservation(sender, instance, created, **kwargs):
     reservation = Reservation(server=instance, reserved_by=None, start_date=None, end_date=None)
     reservation.save()
 
+def check_upcoming(res):
+  if res.started == False and res.start_date != None and res.upcoming_warn == False:
+    time_delta = datetime.date.today() - res.start_date
+    if time_delta < datetime.timedelta(7):
+      email_subject = u"[Serveservation] Reservation for %s Coming Soon" % res.server
+      email_body =u"Your reservation of a server is coming soon. \n\nReservation start date: %s\nReservation end date: %s\n\nServer Name: %s\nServer IP: %s\n" % (res.start_date, res.end_date, res.server.name, res.server.ip_address) 
+      email_from="david.dropinski@unboundid.com"
+      email_to=[]
+      email_to.append(res.reserved_by.email)
+      send_mail(email_subject, email_body, email_from, email_to, fail_silently=False) 
+      res.upcoming_warn = True
+      res.save()
 
 def check_expired(res):
   if (res.end_date != None) :

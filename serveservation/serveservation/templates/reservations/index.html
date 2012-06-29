@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %} 
+Reservations
+{% endblock %}
+
+{% block content %}
+  {% if all_reservations %}
+    <table>
+      <tr>
+        <td>Server</td>
+        <td>Reserved By</td>
+        <td>Starting Date</td>
+        <td>Ending Date</td>
+      </tr>
+      {% for reservation in all_reservations %}
+        {% if reservation.reserved_by != None %}
+          <tr>
+            <td> {{ reservation.server.name  }} </td>
+            <td> {{ reservation.reserved_by }} </td>
+            <td> {{ reservation.start_date }} </td>
+            <td> {{ reservation.end_date }} </td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>No reservations exist.</p>
+  {% endif %}
+{% endblock %}

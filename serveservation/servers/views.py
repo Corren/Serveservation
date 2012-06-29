@@ -13,6 +13,10 @@ from servers.models import Server, Reservation
   #})
   #return HttpResponse(t.render(c))
 
-def index(request):
+def servers(request):
   all_servers_list = Server.objects.all()
   return render_to_response('servers/index.html', {'all_servers_list' : all_servers_list} )
+
+def reservations(request):
+  all_reservations = Reservation.objects.all()
+  return render_to_response('reservations/index.html', {'all_reservations' : all_reservations})

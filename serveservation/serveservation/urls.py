@@ -13,7 +13,12 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^servers/$', 'servers.views.index'),
+    url(r'^servers/$', 'servers.views.servers'),
+    url(r'^reservations/$', 'servers.views.reservations'),
     url(r'^accounts/', include('registration.backends.default.urls')),
+)
+
+urlpatterns += patterns('django.views.generic.simple',
+    (r'^accounts/profile/$', 'redirect_to', {'url': '/servers/'}),
 )
 
