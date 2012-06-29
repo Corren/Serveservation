@@ -13,11 +13,12 @@ from django.core.mail import send_mail
 
 class Server(models.Model):
   name = models.CharField(max_length=150)
-  operating_system = models.CharField(max_length=150, default='')
   ip_address = models.IPAddressField(default="0.0.0.0")
+  operating_system = models.CharField(max_length=150, default='')
   cpu = models.CharField(max_length=150)
   memory = models.IntegerField()
   operational = models.BooleanField()
+  reservable = models.BooleanField()
   notes = models.CharField(max_length=300, blank=True, null=True)
 
   def __unicode__(self):
