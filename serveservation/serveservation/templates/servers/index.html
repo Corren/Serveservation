@@ -18,7 +18,7 @@ Servers
       </tr>
       {% for server in all_servers_list %}
         <tr>
-          <td> {{ server.name }} </td>
+          <td><a href="/servers/{{ server.name }}"> {{ server.name }} </a>  </td>
           <td> {{ server.operating_system }} </td>
           <td> {{ server.cpu }} </td>
           <td> {{ server.memory }} </td>
