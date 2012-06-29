@@ -13,8 +13,8 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^servers/$', 'servers.views.servers'),
-    url(r'^reservations/$', 'servers.views.reservations'),
+    url(r'^servers/', include('servers.server-urls')),
+    url(r'^reservations/', include('servers.reservation-urls')),
     url(r'^accounts/', include('registration.backends.default.urls')),
 )
 
