@@ -19,6 +19,6 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('django.views.generic.simple',
-    (r'^accounts/profile/$', 'redirect_to', {'url': '/servers/'}),
+    (r'^accounts/profile/$', 'redirect_to', {'url': 'generic_account_url'}),
 )
 

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}
+Reserve a Server
+{% endblock %}
+
+{% block content %}
+<form method="post" action="">
+  {{ formset }}
+  {% csrf_token %}
+  <input type="submit" value="Reserve Server" />
+</form>
+{% endblock %}
