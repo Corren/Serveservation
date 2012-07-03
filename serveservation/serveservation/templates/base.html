@@ -4,16 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-    <link rel="stylesheet" href="/style.css" />
-    <title>{% block title %}User test{% endblock %}</title>
+   <!-- <link rel="stylesheet" href="/style.css" /> -->
+    <title>{% block title %}Servervation{% endblock %}</title>
   <!-- VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV############################ -->
-
-	<title>Server Reservations</title>
+<link rel="stylesheet" href="s/static/common/styles/layout.css" type="text/css" />
+    <title>Server Reservations</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta http-equiv="imagetoolbar" content="no" />
-<link rel="stylesheet" href="styles/layout.css" type="text/css" />
-<script type="text/javascript" src=% static "scripts/jquery-1.4.1.min.js" %></script>
-<script type="text/javascript" src=% static"scripts/jquery-slidedeck.pack.lite.js"%></script>
+
+<script type="text/javascript" src="s/static/common/scripts/jquery-1.4.1.min.js" %></script>
+<script type="text/javascript" src="s/static/common/scripts/jquery-slidedeck.pack.lite.js"%></script>
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^########################## -->
 
 </head>
@@ -25,18 +25,22 @@
 <div class="wrapper row1">
   <div id="header" class="clear">
     <div class="fl_left">
-      <h1><a href="index.html"><img src="images/unboundID-logo.png" alt="Will be changed later." /></a></h1>
+      <h1><a href="index.html"><img src="s/static/common/images/unboundID-logo.png" alt="Will be changed later." /></a></h1>
       <p>Server Reservations</p>
     </div>
-    <form action="#" method="post" id="login">
-      <fieldset>
+    
+    <!--<form action="#" method="post" id="login">
+      <fieldset> 
         <legend>Login</legend>
         <input type="password" /> 
         <input type="text" />
         <div id="forgot">Need <a href="#">Help ?</a> or <a href="#">Forgot Your Details?</a></div>
-        <input type="image" src="images/sign_in.gif" id="signin" alt="Sign In" />
-      </fieldset>
-    </form>
+        <input type="image" src="s/static/common/images/sign_in.gif" id="signin" alt="Sign In" />
+      </fieldset>                           
+      
+      
+     
+    </form> I DONT THINK WE ACTUALLY NEED THIS AS THERE ALREADY IS A TEMPLATE FOR ALOWING USERS TO LOGIN -->
   </div>
 </div>
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^########################## -->
@@ -69,7 +73,18 @@
 
 
           {% else %}
-            <a href="{% url auth_login %}">{% trans "Log in" %}</a>
+            <a href="{% url auth_login %}">{% trans "Log ina" %}</a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
           {% endif %}
           <hr />
         {% endblock %}
@@ -85,7 +100,7 @@
 
 		<div class="wrapper">
   <div id="copyright" class="clear">
-    <p class="fl_left">Copyright &copy; 2012 - All Rights Reserved - <a href="www.unboundid.com">UnboundID</a></p>
+    <p class="fl_left">Copyright &copy; 2012 - All Rights Reserved - <a href="http://www.unboundid.com">UnboundID</a></p>
     <!-- <p class="fl_right">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p> -->
   </div>
 </div>
@@ -94,6 +109,7 @@
         <hr />
         {% endblock %}
     </div>
+
 </body>
 
 </html>
