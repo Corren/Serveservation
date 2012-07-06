@@ -4,16 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-   <!-- <link rel="stylesheet" href="/style.css" /> -->
+   <!-- <link rel="stylesheet" href="/style.css" /> --> 
     <title>{% block title %}Servervation{% endblock %}</title>
   <!-- VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV############################ -->
-<link rel="stylesheet" href="s/static/common/styles/layout.css" type="text/css" />
+<link rel="stylesheet" href="/s/static/common/styles/layout.css" type="text/css" />
     <title>Server Reservations</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <meta http-equiv="imagetoolbar" content="no" />
 
-<script type="text/javascript" src="s/static/common/scripts/jquery-1.4.1.min.js" %></script>
-<script type="text/javascript" src="s/static/common/scripts/jquery-slidedeck.pack.lite.js"%></script>
+<script type="text/javascript" src="/s/static/common/scripts/jquery-1.4.1.min.js" %></script>
+<script type="text/javascript" src="/s/static/common/scripts/jquery-slidedeck.pack.lite.js"%></script>
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^########################## -->
 
 </head>
@@ -25,7 +25,7 @@
 <div class="wrapper row1">
   <div id="header" class="clear">
     <div class="fl_left">
-      <h1><a href="index.html"><img src="s/static/common/images/unboundID-logo.png" alt="Will be changed later." /></a></h1>
+      <h1><a href="index.html"><img src="/s/static/common/images/unboundID-logo.png" alt="Will be changed later." /></a></h1>
       <p>Server Reservations</p>
     </div>
     
@@ -73,7 +73,7 @@
 
 
           {% else %}
-            <a href="{% url auth_login %}">{% trans "Log ina" %}</a>
+            <a href="{% url auth_login %}">{% trans "Log in" %}</a>
             
             
             

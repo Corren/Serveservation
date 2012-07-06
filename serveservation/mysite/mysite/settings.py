@@ -1,21 +1,18 @@
-# Django settings for serveservation project.
+# Django settings for mysite project.
 
-import os
-
-
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-     (('David Dropinski', 'DropinskiD@gmail.com'), ('Jonathan Gregory', 'jonathanmgregory@hotmail.com'))
+    # ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'database.db',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -49,35 +46,30 @@ USE_L10N = True
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, "media" + os.path.sep)
+MEDIA_ROOT = ''
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = '/s/media/'
+MEDIA_URL = ''
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-# STATIC_ROOT = os.path.join(PROJECT_ROOT, "static")
 STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/s/static/'
-# STATIC_URL = 'C:/Users/jgregory/Documents/GitHub/Serveservation/serveservation/serveservation/static_media'
+STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_ROOT, "static_media"),
 )
 
 # List of finder classes that know how to find static files in
@@ -89,7 +81,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'kk7bs$y*2n^nrp6^vn^e5f-7)95a&amp;5ng+^qck09%(md+r^wsmi'
+SECRET_KEY = 'jnj$zt1ruxw740lasr)+b=%&amp;j%m)7-q%-aev60o8^q+x6n+%x-'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -108,17 +100,15 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'serveservation.urls'
+ROOT_URLCONF = 'mysite.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'serveservation.wsgi.application'
+WSGI_APPLICATION = 'mysite.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_ROOT, "templates"),
-    os.path.join(PROJECT_ROOT, "static_media"), 
 )
 
 INSTALLED_APPS = (
@@ -129,35 +119,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    'django.contrib.admindocs',
-
-    'south',
-    'registration',
-    'kombu.transport.django',
-    'djcelery',
-
-    # Our own models
-    'servers',
+    # 'django.contrib.admindocs',
 )
-
-
-# Celery Things
-BROKER_URL = "django://" # Tell kombu to use the django database as message queue
-import djcelery
-djcelery.setup_loader()
-
-# Django-Registration things
-ACCOUNT_ACTIVATION_DAYS = 7 #Allow the user a week to activate
-
-# Email Alert Things
-EMAIL_HOST='smtp.gmail.com'
-EMAIL_PORT=587
-EMAIL_HOST_USER=''
-EMAIL_HOST_PASSWORD=''
-EMAIL_SUBJECT_PREFIX='[Serveservation]'
-EMAIL_USE_TLS=True
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -187,9 +152,3 @@ LOGGING = {
         },
     }
 }
-
-try:
-  from local_settings import *
-  print "Local settings being used"
-except:
-  pass
