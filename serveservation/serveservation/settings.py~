@@ -3,7 +3,7 @@
 import os
 
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -193,4 +193,3 @@ try:
   print "Local settings being used"
 except:
   pass
-
